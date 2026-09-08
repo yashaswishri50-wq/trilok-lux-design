@@ -202,7 +202,7 @@ function Index() {
             <img
               src={logo.url}
               alt="Hotel Trilok logo"
-              className="h-10 w-auto shrink-0 object-contain sm:h-12"
+              className="h-10 w-auto shrink-0 object-contain mix-blend-screen sm:h-12"
             />
           </a>
           <div className="flex items-center gap-6">
@@ -246,7 +246,7 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="relative min-h-[100svh] overflow-hidden pt-28 pb-16">
+      <section id="top" className="relative min-h-[100svh] overflow-hidden pt-28 pb-20 flex items-center">
         <img
           src={heroLobby}
           alt="Grand marble lobby of Hotel Trilok at night"
@@ -260,7 +260,7 @@ function Index() {
           <img
             src={logo.url}
             alt="Hotel Trilok"
-            className="animate-rise w-64 max-w-full object-contain sm:w-80 md:w-[26rem]"
+            className="animate-rise w-64 max-w-full object-contain mix-blend-screen sm:w-80 md:w-[26rem]"
           />
           <p className="eyebrow animate-shimmer mt-6">Three Worlds · One Hospitality</p>
           <h1 className="animate-rise mt-4 text-4xl leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
@@ -626,7 +626,7 @@ function Index() {
       <footer className="bg-surface/40">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-3 lg:px-8">
           <div>
-            <img src={logo.url} alt="Hotel Trilok" className="h-16 w-auto object-contain" />
+            <img src={logo.url} alt="Hotel Trilok" className="h-16 w-auto object-contain mix-blend-screen" />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               Three worlds, one hospitality. A modern palace hotel for travellers who notice the
               details.
