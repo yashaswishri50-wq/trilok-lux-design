@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CalendarDays, Users, Search, BedDouble } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 export function BookingWidget({ compact = false }: { compact?: boolean }) {
   const today = new Date().toISOString().slice(0, 10);
@@ -67,13 +68,14 @@ export function BookingWidget({ compact = false }: { compact?: boolean }) {
             ))}
           </select>
         </Field>
-        <button
+        <Button
+          variant="gold"
           type="submit"
-          className="btn-gold flex h-[52px] items-center justify-center gap-2 px-6 text-xs sm:text-sm"
+          className="h-[52px] px-6 text-xs sm:text-sm"
         >
           <Search className="h-4 w-4" />
-          Book Now
-        </button>
+          Check Availability
+        </Button>
       </div>
       <p className="mt-4 text-xs tracking-wide text-muted-foreground">
         Book direct and unlock room upgrades, complimentary breakfast and late checkout.

@@ -184,6 +184,19 @@
   }
 }
 
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@utility animate-hero-image {
+  animation: hero-ken-burns 8s ease-out both;
+}
+
 @utility animate-rise {
   animation: rise-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -221,5 +234,16 @@
   }
   &:focus {
     border-color: var(--gold);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
