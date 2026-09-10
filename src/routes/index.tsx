@@ -70,7 +70,7 @@ const nav = [
   { label: "Stay", href: "#rooms" },
   { label: "Dine", href: "#dining" },
   { label: "Wellness", href: "#wellness" },
-  { label: "Events", href: "#events" },
+  { label: "Celebrations", href: "#celebrations" },
   { label: "Offers", href: "#offers" },
   { label: "Gallery", href: "#gallery" },
   { label: "Contact", href: "#contact" },
@@ -221,7 +221,7 @@ const reviews = [
   },
 ];
 
-const gallery = [heroLobby, roomSuite, dining, spa, banquet, highTea, lounge, pool];
+const gallery = [heroLobby, wedding, roomSuite, dining, celebration, spa, banquet, highTea, lounge, pool];
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
@@ -353,14 +353,18 @@ function Index() {
         <div className="absolute right-4 bottom-5 left-4 z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 lg:px-4">
           <div className="flex items-center gap-2" aria-label="Hero slideshow navigation">
             {heroSlides.map((slide, index) => (
-              <button
+              <Button
                 key={slide.label}
+                variant="ghost"
+                size="icon"
                 type="button"
                 aria-label={`Show ${slide.label}`}
                 aria-current={index === heroIndex ? "true" : undefined}
                 onClick={() => showHeroSlide(index)}
-                className={`h-1 transition-all duration-500 ${index === heroIndex ? "w-10 bg-gold" : "w-5 bg-foreground/45"}`}
-              />
+                className="h-8 w-10 p-0 hover:bg-transparent"
+              >
+                <span className={`h-1 transition-all duration-500 ${index === heroIndex ? "w-10 bg-gold" : "w-5 bg-foreground/45"}`} />
+              </Button>
             ))}
           </div>
           <div className="flex gap-2">
