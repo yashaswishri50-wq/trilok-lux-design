@@ -4,6 +4,8 @@ import {
   ArrowUpRight,
   BellRing,
   Car,
+  ChevronLeft,
+  ChevronRight,
   ConciergeBell,
   Dumbbell,
   Facebook,
@@ -14,6 +16,8 @@ import {
   Mail,
   MapPin,
   Phone,
+  Pause,
+  Play,
   Quote,
   Sparkles,
   Star,
@@ -25,6 +29,7 @@ import {
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { BookingWidget } from "@/components/BookingWidget";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 import logo from "@/assets/trilok-logo.png.asset.json";
 import heroLobby from "@/assets/hero-lobby.jpg";
@@ -36,6 +41,8 @@ import highTea from "@/assets/high-tea.jpg";
 import lounge from "@/assets/lounge.jpg";
 import gym from "@/assets/gym.jpg";
 import pool from "@/assets/pool.jpg";
+import wedding from "@/assets/trilok-wedding.jpg";
+import celebration from "@/assets/trilok-celebration.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -74,26 +81,66 @@ const rooms = [
     name: "Deluxe Room",
     img: roomSuite,
     size: "44 sq.m",
-    price: "₹12,500",
+    price: "₹X",
     blurb: "Silk-panelled walls, king bed and skyline views with a marble rain-shower bath.",
     perks: ["King bed", "City view", "Butler on call"],
   },
   {
-    name: "Royal Suite",
+    name: "Premium Room",
     img: lounge,
     size: "78 sq.m",
-    price: "₹24,900",
+    price: "₹X",
     blurb: "A private living room, dining nook and lounge access with evening canapés.",
     perks: ["Living room", "Lounge access", "Airport transfer"],
   },
   {
-    name: "Presidential Suite",
+    name: "Trilok Suite",
     img: heroLobby,
     size: "140 sq.m",
-    price: "₹52,000",
+    price: "₹X",
     blurb: "The crown of Trilok — panoramic terrace, private spa room and dedicated butler.",
     perks: ["Private terrace", "In-suite spa", "Chauffeur"],
   },
+];
+
+const heroSlides = [
+  {
+    image: heroLobby,
+    label: "The Grand Welcome",
+    title: "Arrive to a world of gracious hospitality",
+    text: "A lavish reception, thoughtful service and the unmistakable warmth of India.",
+  },
+  {
+    image: roomSuite,
+    label: "Rooms & Suites",
+    title: "Beautiful stays, made personal",
+    text: "Quiet comfort, refined details and every convenience close at hand.",
+  },
+  {
+    image: dining,
+    label: "Dining at Trilok",
+    title: "Flavours worth gathering around",
+    text: "Indian favourites, global classics and memorable tables from morning to night.",
+  },
+  {
+    image: wedding,
+    label: "Weddings at Trilok",
+    title: "Your grand celebration begins here",
+    text: "Radiant halls, beautiful rituals and a team devoted to every unforgettable detail.",
+  },
+  {
+    image: celebration,
+    label: "Celebrations & Events",
+    title: "Every milestone deserves a magnificent setting",
+    text: "Birthdays, engagements, receptions, family functions and corporate gatherings.",
+  },
+];
+
+const celebrations = [
+  "Wedding Celebrations",
+  "Engagements & Receptions",
+  "Birthdays & Family Functions",
+  "Corporate Events",
 ];
 
 const dine = [
@@ -179,6 +226,8 @@ const gallery = [heroLobby, roomSuite, dining, spa, banquet, highTea, lounge, po
 function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [heroPlaying, setHeroPlaying] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -186,6 +235,21 @@ function Index() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!heroPlaying) return;
+    const timer = window.setInterval(() => {
+      setHeroIndex((current) => (current + 1) % heroSlides.length);
+    }, 6500);
+    return () => window.clearInterval(timer);
+  }, [heroPlaying]);
+
+  const showHeroSlide = (index: number) => {
+    setHeroIndex((index + heroSlides.length) % heroSlides.length);
+  };
+
+  const activeHero = heroSlides[heroIndex] ?? heroSlides[0];
+  if (!activeHero) return null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -220,13 +284,14 @@ function Index() {
             <a href="#book" className="btn-gold hidden rounded-sm px-5 py-3 text-xs sm:inline-block">
               Book Your Stay
             </a>
-            <button
+            <Button
+              variant="outline-gold"
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Menu"
-              className="btn-outline-gold rounded-sm px-3 py-2 text-xs lg:hidden"
+              className="h-auto px-3 py-2 text-xs lg:hidden"
             >
               Menu
-            </button>
+            </Button>
           </div>
         </div>
         {menuOpen && (
@@ -246,14 +311,20 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="relative min-h-[100svh] overflow-hidden pt-28 pb-20 flex items-center">
-        <img
-          src={heroLobby}
-          alt="Grand marble lobby of Hotel Trilok at night"
-          width={1920}
-          height={1088}
-          className="animate-slow-zoom absolute inset-0 h-full w-full object-cover"
-        />
+      <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-24">
+        {heroSlides.map((slide, index) => (
+          <img
+            key={slide.label}
+            src={slide.image}
+            alt={slide.label}
+            width={1920}
+            height={1088}
+            aria-hidden={index !== heroIndex}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              index === heroIndex ? "animate-hero-image opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_10%,transparent,oklch(0.12_0.05_268/0.92))]" />
         <div className="absolute inset-0 bg-ink/45" />
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 text-center lg:px-8">
@@ -262,25 +333,46 @@ function Index() {
             alt="Hotel Trilok"
             className="animate-rise w-64 max-w-full object-contain mix-blend-screen sm:w-80 md:w-[26rem]"
           />
-          <p className="eyebrow animate-shimmer mt-6">Three Worlds · One Hospitality</p>
-          <h1 className="animate-rise mt-4 text-4xl leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            An address where <span className="text-gold-gradient italic">opulence</span>
-            <br className="hidden sm:block" /> greets you by name
+          <p className="eyebrow animate-shimmer mt-6">{activeHero.label}</p>
+          <h1 key={activeHero.title} className="animate-rise mt-4 max-w-5xl text-4xl leading-[1.05] tracking-normal sm:text-6xl md:text-7xl">
+            {activeHero.title}
           </h1>
-          <p className="mt-5 max-w-2xl text-sm text-foreground/80 sm:text-base">
-            Palatial suites, chef-led dining, a candlelit spa and grand ballrooms — all wrapped in
-            the warmth of Indian hospitality.
-          </p>
+          <p className="mt-5 max-w-2xl text-sm text-foreground/85 sm:text-base">{activeHero.text}</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <a href="#book" className="btn-gold rounded-sm px-8 py-4 text-sm">
               Book Your Stay
             </a>
-            <a href="#rooms" className="btn-outline-gold rounded-sm px-8 py-4 text-xs">
-              Explore Suites
+            <a href="#celebrations" className="btn-outline-gold rounded-sm px-8 py-4 text-xs">
+              Plan Your Wedding
             </a>
           </div>
           <div id="book" className="mt-10 w-full max-w-5xl scroll-mt-28">
             <BookingWidget />
+          </div>
+        </div>
+        <div className="absolute right-4 bottom-5 left-4 z-20 mx-auto flex max-w-7xl items-center justify-between gap-4 lg:px-4">
+          <div className="flex items-center gap-2" aria-label="Hero slideshow navigation">
+            {heroSlides.map((slide, index) => (
+              <button
+                key={slide.label}
+                type="button"
+                aria-label={`Show ${slide.label}`}
+                aria-current={index === heroIndex ? "true" : undefined}
+                onClick={() => showHeroSlide(index)}
+                className={`h-1 transition-all duration-500 ${index === heroIndex ? "w-10 bg-gold" : "w-5 bg-foreground/45"}`}
+              />
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <Button variant="outline-gold" size="icon" onClick={() => showHeroSlide(heroIndex - 1)} aria-label="Previous hero image">
+              <ChevronLeft />
+            </Button>
+            <Button variant="outline-gold" size="icon" onClick={() => setHeroPlaying((playing) => !playing)} aria-label={heroPlaying ? "Pause slideshow" : "Play slideshow"}>
+              {heroPlaying ? <Pause /> : <Play />}
+            </Button>
+            <Button variant="outline-gold" size="icon" onClick={() => showHeroSlide(heroIndex + 1)} aria-label="Next hero image">
+              <ChevronRight />
+            </Button>
           </div>
         </div>
       </section>
@@ -341,7 +433,7 @@ function Index() {
                   </ul>
                   <div className="mt-6 flex items-end justify-between gap-3">
                     <p className="text-sm text-muted-foreground">
-                      from <span className="font-display text-2xl text-gold">{r.price}</span> / night
+                      From <span className="font-display text-2xl text-gold">{r.price}</span>/night
                     </p>
                     <a href="#book" className="btn-gold rounded-sm px-4 py-2.5 text-[0.68rem]">
                       Book Now
@@ -434,44 +526,55 @@ function Index() {
       </Section>
 
       {/* Events */}
-      <Section id="events" eyebrow="Banquets · Conferences · Celebrations" title="Grand rooms for grand occasions" tinted>
-        <div className="grid items-center gap-8 lg:grid-cols-2">
+      <Section id="celebrations" eyebrow="Weddings · Celebrations · Events" title="Make every milestone magnificent" text="From intimate family moments to spectacular weddings, our celebration team brings every detail together with warmth, imagination and impeccable care." tinted>
+        <div className="grid items-stretch gap-6 lg:grid-cols-[1.25fr_0.75fr]">
           <Reveal>
-            <div className="lift-card overflow-hidden rounded-sm">
+            <div className="group relative h-full min-h-[520px] overflow-hidden rounded-sm">
               <img
-                src={banquet}
-                alt="Trilok grand ballroom set for a gala"
+                src={wedding}
+                alt="TRILOK ballroom prepared for a grand Indian wedding"
                 loading="lazy"
-                width={1200}
-                height={900}
-                className="h-full w-full object-cover"
+                width={1536}
+                height={1024}
+                className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-9">
+                <p className="eyebrow">The Trilok Wedding</p>
+                <h3 className="mt-3 max-w-xl text-3xl sm:text-5xl">A celebration as extraordinary as your story</h3>
+                <a href="#contact" className="btn-gold mt-6 inline-block rounded-sm px-7 py-3.5 text-xs">Plan Your Wedding</a>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={140}>
-            <div>
-              <p className="text-sm text-muted-foreground">
-                Four pillarless halls, a crystal-lit ballroom for 600 and boardrooms wired for
-                hybrid conferences. Our events team handles décor, catering and choreography.
-              </p>
-              <dl className="mt-6 grid grid-cols-2 gap-4">
-                {[
-                  ["600", "Ballroom guests"],
-                  ["4", "Event halls"],
-                  ["12", "Boardrooms"],
-                  ["24/7", "Event concierge"],
-                ].map(([n, l]) => (
-                  <div key={l} className="rounded-sm border border-border bg-card p-4">
-                    <dt className="font-display text-3xl text-gold">{n}</dt>
-                    <dd className="text-xs tracking-[0.18em] text-muted-foreground uppercase">{l}</dd>
-                  </div>
-                ))}
-              </dl>
-              <a href="#contact" className="btn-gold mt-6 inline-block rounded-sm px-7 py-3.5 text-xs">
-                Plan Your Event
-              </a>
+            <div className="flex h-full flex-col bg-card">
+              <img src={celebration} alt="Family celebration in a TRILOK party hall" loading="lazy" width={1536} height={1024} className="aspect-16/10 w-full object-cover" />
+              <div className="flex flex-1 flex-col p-6 sm:p-8">
+                <p className="eyebrow">Celebrate Your Way</p>
+                <ul className="mt-5 grid gap-3">
+                  {celebrations.map((item) => (
+                    <li key={item} className="flex items-center gap-3 border-b border-border pb-3 text-sm last:border-0">
+                      <Sparkles className="h-4 w-4 shrink-0 text-gold" />{item}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="btn-outline-gold mt-auto inline-block self-start rounded-sm px-7 py-3.5 text-xs">Enquire for Events</a>
+              </div>
             </div>
           </Reveal>
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {[
+            [banquet, "Grand Wedding Halls"],
+            [celebration, "Parties & Family Functions"],
+            [lounge, "Corporate Gatherings"],
+          ].map(([image, label]) => (
+            <a key={label} href="#contact" className="group relative h-48 overflow-hidden rounded-sm">
+              <img src={image} alt={label} loading="lazy" width={1200} height={800} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <span className="absolute inset-0 bg-gradient-to-t from-ink/90 to-transparent" />
+              <span className="absolute inset-x-0 bottom-0 p-5 font-display text-2xl">{label}</span>
+            </a>
+          ))}
         </div>
       </Section>
 
@@ -601,9 +704,9 @@ function Index() {
               <input required type="email" placeholder="Email" className="lux-input" />
               <input placeholder="Phone" className="lux-input" />
               <textarea rows={4} placeholder="Tell us about your stay or event" className="lux-input" />
-              <button type="submit" className="btn-gold w-full rounded-sm py-3.5 text-xs">
+              <Button type="submit" variant="gold" className="h-auto w-full py-3.5 text-xs">
                 Send Enquiry
-              </button>
+              </Button>
             </form>
           </Reveal>
         </div>
