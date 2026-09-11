@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_mode: string
+          check_in: string
+          check_out: string
+          confirmation_code: string
+          created_at: string
+          email: string
+          full_name: string
+          guests: string
+          id: string
+          phone: string
+          room_type: string
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          booking_mode: string
+          check_in: string
+          check_out: string
+          confirmation_code: string
+          created_at?: string
+          email: string
+          full_name: string
+          guests: string
+          id?: string
+          phone: string
+          room_type: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          booking_mode?: string
+          check_in?: string
+          check_out?: string
+          confirmation_code?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          guests?: string
+          id?: string
+          phone?: string
+          room_type?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          phone: string
+          preferences: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string
+          id: string
+          phone?: string
+          preferences?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          preferences?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
