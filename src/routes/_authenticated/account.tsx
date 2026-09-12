@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_authenticated/account")({
 
 function AccountPage() {
   const { user } = Route.useRouteContext();
-  const [profile, setProfile] = useState({ full_name: user.user_metadata?.full_name ?? "", phone: "", preferences: "" });
+  const [profile, setProfile] = useState({ full_name: (user.user_metadata?.['full_name'] as string | undefined) ?? "", phone: "", preferences: "" });
   const [bookings, setBookings] = useState<Tables<"bookings">[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -52,7 +52,10 @@ function AccountPage() {
             <form className="mt-6 space-y-4" onSubmit={async (event) => {
               event.preventDefault();
               const { error } = await supabase.from("profiles").upsert({ id: user.id, ...profile });
-              if (error) return toast.error(error.message);
+              if (error) {
+                toast.error(error.message);
+                return;
+              }
               toast.success("Guest profile saved.");
             }}>
               <label className="block text-xs text-muted-foreground">Email<input className="lux-input mt-1" value={user.email ?? ""} disabled /></label>
