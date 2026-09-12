@@ -34,7 +34,10 @@ function ResetPasswordPage() {
         event.preventDefault();
         if (!recovery) return;
         const { error } = await supabase.auth.updateUser({ password });
-        if (error) return toast.error(error.message);
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
         toast.success("Your password has been updated.");
         await navigate({ to: "/account", replace: true });
       }} className="panel-lux w-full max-w-md space-y-5 rounded-sm p-7">

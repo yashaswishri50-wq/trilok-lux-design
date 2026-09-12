@@ -31,7 +31,7 @@ export function AuthControl() {
     );
   }
 
-  const label = user.user_metadata?.full_name || user.email?.split("@")[0] || "Guest";
+  const label = user.user_metadata?.['full_name'] || user.email?.split("@")[0] || "Guest";
 
   return (
     <DropdownMenu>
