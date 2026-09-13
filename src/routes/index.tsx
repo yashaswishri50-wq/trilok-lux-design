@@ -43,6 +43,7 @@ import gym from "@/assets/gym.jpg";
 import pool from "@/assets/pool.jpg";
 import wedding from "@/assets/trilok-wedding.jpg";
 import celebration from "@/assets/trilok-celebration.jpg";
+import welcomeAmenities from "@/assets/trilok-welcome-amenities.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
