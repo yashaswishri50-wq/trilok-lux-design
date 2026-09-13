@@ -173,6 +173,29 @@ const wellness = [
   { name: "Rooftop Pool", img: pool, blurb: "Heated infinity pool with sunset cabana service." },
 ];
 
+const welcomeGifts = [
+  {
+    icon: Gem,
+    title: "Trilok signature welcome kit",
+    text: "A crested keepsake box with branded stationery, a scented sachet and a hand-written note from our general manager.",
+  },
+  {
+    icon: Utensils,
+    title: "Complimentary tea, coffee & cookies",
+    text: "Single-estate Indian teas, freshly roasted coffee and house-baked cookies, served on a polished Trilok tray.",
+  },
+  {
+    icon: Waves,
+    title: "Mini fridge, fully stocked",
+    text: "Chilled mineral water, cold-pressed juices, soft drinks and energy beverages — all complimentary, replenished every day.",
+  },
+  {
+    icon: BellRing,
+    title: "Refill on request, anytime",
+    text: "One call to the concierge and your tray and fridge are restocked, day or night, at no extra cost.",
+  },
+];
+
 const services = [
   { icon: ConciergeBell, title: "Concierge", text: "Curated city itineraries, reservations and private tours." },
   { icon: BellRing, title: "24h Room Service", text: "Full à la carte dining delivered to your suite around the clock." },
