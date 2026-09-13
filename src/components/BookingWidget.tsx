@@ -60,8 +60,9 @@ export function BookingWidget({ compact = false }: { compact?: boolean }) {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!checkOut) {
-      toast.error("Please select your check-out date.");
+    if (!checkIn || !checkOut) {
+      toast.error("Please select your check-in and check-out dates.");
+      setDatesOpen(true);
       return;
     }
     if (checkOut <= checkIn) {
