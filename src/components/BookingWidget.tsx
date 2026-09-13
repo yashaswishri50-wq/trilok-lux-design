@@ -105,24 +105,45 @@ export function BookingWidget({ compact = false }: { compact?: boolean }) {
       >
         <p className="eyebrow mb-4">Check Availability · Best Rate Guaranteed</p>
         <div className="grid gap-3 md:grid-cols-[repeat(4,minmax(0,1fr))_auto] md:items-end">
-          <Field label="Check In" icon={<CalendarDays className="h-4 w-4" />}>
-            <input
-              type="date"
-              value={checkIn}
-              min={today}
-              onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full bg-transparent text-sm text-foreground outline-none"
-            />
-          </Field>
-          <Field label="Check Out" icon={<CalendarDays className="h-4 w-4" />}>
-            <input
-              type="date"
-              value={checkOut}
-              min={checkIn}
-              onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full bg-transparent text-sm text-foreground outline-none"
-            />
-          </Field>
+          <div className="md:col-span-2">
+            <Popover open={datesOpen} onOpenChange={setDatesOpen}>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  className="block w-full rounded-sm border border-border bg-ink/50 px-3 py-2 text-left"
+                >
+                  <span className="flex items-center gap-2 text-[0.62rem] tracking-[0.25em] text-gold uppercase">
+                    <CalendarDays className="h-4 w-4" />
+                    Check In · Check Out
+                  </span>
+                  <span
+                    className={cn(
+                      "mt-1 block text-sm",
+                      range?.from ? "text-foreground" : "text-muted-foreground",
+                    )}
+                  >
+                    {range?.from
+                      ? `${format(range.from, "dd MMM yyyy")} → ${range.to ? format(range.to, "dd MMM yyyy") : "Select check-out"}`
+                      : "Select your dates"}
+                  </span>
+                </button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-auto border-gold/30 bg-card p-0">
+                <Calendar
+                  mode="range"
+                  defaultMonth={range?.from ?? today}
+                  selected={range}
+                  onSelect={(r) => {
+                    setRange(r);
+                    if (r?.from && r?.to) setDatesOpen(false);
+                  }}
+                  numberOfMonths={1}
+                  disabled={{ before: today }}
+                  className={cn("pointer-events-auto p-3")}
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
           <Field label="Guests" icon={<Users className="h-4 w-4" />}>
             <select
               value={guests}
