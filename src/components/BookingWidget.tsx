@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { CalendarDays, Users, Search, BedDouble, Loader2, CheckCircle2 } from "lucide-react";
+import { format } from "date-fns";
+import type { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Dialog,
   DialogContent,
@@ -9,8 +13,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import type { User } from "@supabase/supabase-js";
+
+function toISO(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 
 function makeCode() {
   return `TRK-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
