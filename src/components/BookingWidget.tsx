@@ -26,9 +26,12 @@ function makeCode() {
 }
 
 export function BookingWidget({ compact = false }: { compact?: boolean }) {
-  const today = new Date().toISOString().slice(0, 10);
-  const [checkIn, setCheckIn] = useState(today);
-  const [checkOut, setCheckOut] = useState("");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [range, setRange] = useState<DateRange | undefined>({ from: today, to: undefined });
+  const [datesOpen, setDatesOpen] = useState(false);
+  const checkIn = range?.from ? toISO(range.from) : "";
+  const checkOut = range?.to ? toISO(range.to) : "";
   const [guests, setGuests] = useState("2 Adults");
   const [roomType, setRoomType] = useState("Deluxe Room");
 
