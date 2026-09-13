@@ -43,6 +43,7 @@ import gym from "@/assets/gym.jpg";
 import pool from "@/assets/pool.jpg";
 import wedding from "@/assets/trilok-wedding.jpg";
 import celebration from "@/assets/trilok-celebration.jpg";
+import welcomeAmenities from "@/assets/trilok-welcome-amenities.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -171,6 +172,29 @@ const wellness = [
   { name: "Trilok Spa", img: spa, blurb: "Ayurvedic rituals, hammam and couples' suites." },
   { name: "24/7 Fitness", img: gym, blurb: "Technogym floor, personal trainers, skyline views." },
   { name: "Rooftop Pool", img: pool, blurb: "Heated infinity pool with sunset cabana service." },
+];
+
+const welcomeGifts = [
+  {
+    icon: Gem,
+    title: "Trilok signature welcome kit",
+    text: "A crested keepsake box with branded stationery, a scented sachet and a hand-written note from our general manager.",
+  },
+  {
+    icon: Utensils,
+    title: "Complimentary tea, coffee & cookies",
+    text: "Single-estate Indian teas, freshly roasted coffee and house-baked cookies, served on a polished Trilok tray.",
+  },
+  {
+    icon: Waves,
+    title: "Mini fridge, fully stocked",
+    text: "Chilled mineral water, cold-pressed juices, soft drinks and energy beverages — all complimentary, replenished every day.",
+  },
+  {
+    icon: BellRing,
+    title: "Refill on request, anytime",
+    text: "One call to the concierge and your tray and fridge are restocked, day or night, at no extra cost.",
+  },
 ];
 
 const services = [
@@ -594,6 +618,46 @@ function Index() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </Section>
+
+      {/* Welcome amenities */}
+      <Section
+        id="welcome"
+        eyebrow="The Trilok Welcome"
+        title="Signature gifts waiting in your room"
+        text="Every arrival is met with our own collection of Trilok-crested comforts — presented the moment you check in, complimentary with every stay."
+        tinted
+      >
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <Reveal>
+            <div className="overflow-hidden rounded-sm border border-gold/30">
+              <img
+                src={welcomeAmenities}
+                alt="Trilok welcome tray with signature tea, coffee, cookies, water and a stocked mini fridge"
+                loading="lazy"
+                width={1280}
+                height={960}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </Reveal>
+          <div className="grid gap-4">
+            {welcomeGifts.map((g, i) => (
+              <Reveal key={g.title} delay={i * 90}>
+                <div className="lift-card flex gap-4 rounded-sm border border-border bg-card p-5">
+                  <g.icon className="mt-1 h-6 w-6 shrink-0 text-gold" />
+                  <div>
+                    <h3 className="text-xl">{g.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{g.text}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+            <p className="text-xs tracking-wide text-muted-foreground">
+              All welcome amenities are complimentary and replenished daily by housekeeping.
+            </p>
+          </div>
         </div>
       </Section>
 
