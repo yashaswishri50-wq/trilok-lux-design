@@ -597,6 +597,46 @@ function Index() {
         </div>
       </Section>
 
+      {/* Welcome amenities */}
+      <Section
+        id="welcome"
+        eyebrow="The Trilok Welcome"
+        title="Signature gifts waiting in your room"
+        text="Every arrival is met with our own collection of Trilok-crested comforts — presented the moment you check in, complimentary with every stay."
+        tinted
+      >
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <Reveal>
+            <div className="overflow-hidden rounded-sm border border-gold/30">
+              <img
+                src={welcomeAmenities}
+                alt="Trilok welcome tray with signature tea, coffee, cookies, water and a stocked mini fridge"
+                loading="lazy"
+                width={1280}
+                height={960}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </Reveal>
+          <div className="grid gap-4">
+            {welcomeGifts.map((g, i) => (
+              <Reveal key={g.title} delay={i * 90}>
+                <div className="lift-card flex gap-4 rounded-sm border border-border bg-card p-5">
+                  <g.icon className="mt-1 h-6 w-6 shrink-0 text-gold" />
+                  <div>
+                    <h3 className="text-xl">{g.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{g.text}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+            <p className="text-xs tracking-wide text-muted-foreground">
+              All welcome amenities are complimentary and replenished daily by housekeeping.
+            </p>
+          </div>
+        </div>
+      </Section>
+
       {/* Offers */}
       <Section
         id="offers"
