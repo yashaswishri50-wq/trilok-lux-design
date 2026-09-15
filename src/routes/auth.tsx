@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/trilok-logo.png.asset.json";
+import logo from "@/assets/trilok-vertical.png.asset.json";
 import heroLobby from "@/assets/hero-lobby.jpg";
 
 export const Route = createFileRoute("/auth")({
@@ -85,11 +85,11 @@ function AuthPage() {
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12">
-      <img src={heroLobby} alt="Hotel Trilok grand reception" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={heroLobby} alt="Hotel Trilok grand reception" className="quiet-photo absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-ink/85" />
       <div className="panel-lux relative w-full max-w-md rounded-sm p-6 sm:p-8">
         <Link to="/" className="mb-6 inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-gold"><ArrowLeft className="h-4 w-4" /> Back to hotel</Link>
-        <img src={logo.url} alt="Hotel Trilok" className="mx-auto h-16 w-auto object-contain mix-blend-screen" />
+        <img src={logo.url} alt="Hotel Trilok" className="mx-auto h-24 w-auto min-w-20 object-contain" />
         <h1 className="mt-5 text-center text-3xl">{mode === "signup" ? "Create your guest account" : mode === "forgot" ? "Reset your password" : "Welcome back"}</h1>
         <p className="mt-2 text-center text-sm text-muted-foreground">{mode === "forgot" ? "We’ll email you a secure recovery link." : "Manage stays and enjoy a smoother arrival."}</p>
         <form onSubmit={submit} className="mt-7 space-y-4">

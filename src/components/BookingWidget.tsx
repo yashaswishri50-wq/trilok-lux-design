@@ -109,9 +109,10 @@ export function BookingWidget({ compact = false }: { compact?: boolean }) {
           <div className="md:col-span-2">
             <Popover open={datesOpen} onOpenChange={setDatesOpen}>
               <PopoverTrigger asChild>
-                <button
+                <Button
                   type="button"
-                  className="block w-full rounded-sm border border-border bg-ink/50 px-3 py-2 text-left"
+                  variant="outline-gold"
+                  className="block h-auto w-full rounded-sm border-border bg-ink/50 px-3 py-2 text-left normal-case"
                 >
                   <span className="flex items-center gap-2 text-[0.62rem] tracking-[0.25em] text-gold uppercase">
                     <CalendarDays className="h-4 w-4" />
@@ -127,7 +128,7 @@ export function BookingWidget({ compact = false }: { compact?: boolean }) {
                       ? `${format(range.from, "dd MMM yyyy")} → ${range.to ? format(range.to, "dd MMM yyyy") : "Select check-out"}`
                       : "Select your dates"}
                   </span>
-                </button>
+                </Button>
               </PopoverTrigger>
               <PopoverContent align="start" className="w-auto border-gold/30 bg-card p-0">
                 <Calendar
