@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/trilok-logo.png.asset.json";
+import logo from "@/assets/trilok-horizontal.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/account")({
   head: () => ({ meta: [
@@ -42,7 +42,7 @@ function AccountPage() {
       <div className="mx-auto max-w-5xl">
         <header className="flex items-center justify-between gap-4 border-b border-border pb-5">
           <Link to="/" className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-gold"><ArrowLeft className="h-4 w-4" /> Hotel</Link>
-          <img src={logo.url} alt="Hotel Trilok" className="h-12 w-auto object-contain mix-blend-screen" />
+          <img src={logo.url} alt="Hotel Trilok" className="h-12 w-auto min-w-20 object-contain" />
           <Button variant="outline-gold" size="sm" onClick={async () => { await supabase.auth.signOut(); await navigate({ to: "/auth", replace: true }); }}><LogOut /> Sign out</Button>
         </header>
         <div className="mt-10 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">

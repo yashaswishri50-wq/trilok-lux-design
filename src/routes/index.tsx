@@ -31,7 +31,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { BookingWidget } from "@/components/BookingWidget";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
-import logo from "@/assets/trilok-logo.png.asset.json";
+import horizontalLogo from "@/assets/trilok-horizontal.png.asset.json";
+import verticalLogo from "@/assets/trilok-vertical.png.asset.json";
 import heroLobby from "@/assets/hero-lobby.jpg";
 import roomSuite from "@/assets/room-suite.jpg";
 import dining from "@/assets/dining.jpg";
@@ -43,7 +44,7 @@ import gym from "@/assets/gym.jpg";
 import pool from "@/assets/pool.jpg";
 import wedding from "@/assets/trilok-wedding.jpg";
 import celebration from "@/assets/trilok-celebration.jpg";
-import welcomeAmenities from "@/assets/trilok-welcome-amenities.jpg";
+import welcomeAmenities from "@/assets/trilok-amenity-kit.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -83,7 +84,7 @@ const rooms = [
     img: roomSuite,
     size: "44 sq.m",
     price: "₹X",
-    blurb: "Silk-panelled walls, king bed and skyline views with a marble rain-shower bath.",
+    blurb: "Serene interiors, a king bed and considered comforts for an effortless stay.",
     perks: ["King bed", "City view", "Butler on call"],
   },
   {
@@ -91,7 +92,7 @@ const rooms = [
     img: lounge,
     size: "78 sq.m",
     price: "₹X",
-    blurb: "A private living room, dining nook and lounge access with evening canapés.",
+    blurb: "A generous living area, refined finishes and attentive service throughout your stay.",
     perks: ["Living room", "Lounge access", "Airport transfer"],
   },
   {
@@ -99,7 +100,7 @@ const rooms = [
     img: heroLobby,
     size: "140 sq.m",
     price: "₹X",
-    blurb: "The crown of Trilok — panoramic terrace, private spa room and dedicated butler.",
+    blurb: "An expansive sanctuary shaped by timeless design, privacy and thoughtful care.",
     perks: ["Private terrace", "In-suite spa", "Chauffeur"],
   },
 ];
@@ -108,8 +109,8 @@ const heroSlides = [
   {
     image: heroLobby,
     label: "The Grand Welcome",
-    title: "Arrive to a world of gracious hospitality",
-    text: "A lavish reception, thoughtful service and the unmistakable warmth of India.",
+    title: "Experience the art of ethereal hospitality",
+    text: "Where timeless elegance meets impeccable service in a sanctuary shaped around you.",
   },
   {
     image: roomSuite,
@@ -288,9 +289,9 @@ function Index() {
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 lg:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-3">
             <img
-              src={logo.url}
+              src={horizontalLogo.url}
               alt="Hotel Trilok logo"
-              className="h-10 w-auto shrink-0 object-contain mix-blend-screen sm:h-12"
+              className="h-12 w-auto min-w-20 shrink-0 object-contain sm:h-14"
             />
           </a>
           <div className="flex items-center gap-6">
@@ -299,7 +300,7 @@ function Index() {
                 <a
                   key={n.href}
                   href={n.href}
-                  className="text-xs tracking-[0.22em] text-foreground/80 uppercase transition-colors hover:text-gold"
+                  className="font-heritage text-[0.65rem] tracking-[0.14em] text-foreground/80 uppercase transition-colors hover:text-gold"
                 >
                   {n.label}
                 </a>
@@ -353,14 +354,13 @@ function Index() {
         <div className="absolute inset-0 bg-ink/45" />
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 text-center lg:px-8">
           <img
-            src={logo.url}
+            src={verticalLogo.url}
             alt="Hotel Trilok"
-            className="animate-rise w-64 max-w-full object-contain mix-blend-screen sm:w-80 md:w-[26rem]"
+            className="animate-rise w-52 max-w-full object-contain sm:w-64"
           />
-          <p className="eyebrow animate-shimmer mt-6">{activeHero.label}</p>
-          <h1 key={activeHero.title} className="animate-rise mt-4 max-w-5xl text-4xl leading-[1.05] tracking-normal sm:text-6xl md:text-7xl">
-            {activeHero.title}
-          </h1>
+          <p className="font-heritage mt-6 text-xs tracking-[0.25em] text-gold uppercase">Hotel Trilok</p>
+          <p className="eyebrow mt-3">Three Worlds. One Hospitality.</p>
+          <h1 key={activeHero.title} className="animate-rise mt-5 max-w-5xl text-4xl leading-[1.05] tracking-normal sm:text-6xl md:text-7xl">{activeHero.title}</h1>
           <p className="mt-5 max-w-2xl text-sm text-foreground/85 sm:text-base">{activeHero.text}</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <a href="#book" className="btn-gold rounded-sm px-8 py-4 text-sm">
@@ -440,7 +440,7 @@ function Index() {
                     loading="lazy"
                     width={1200}
                     height={900}
-                    className="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-110"
+                    className="quiet-photo h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
                   />
                   <span className="absolute top-3 left-3 rounded-sm bg-ink/80 px-3 py-1 text-[0.62rem] tracking-[0.2em] text-gold uppercase">
                     {r.size}
@@ -638,7 +638,7 @@ function Index() {
                 loading="lazy"
                 width={1280}
                 height={960}
-                className="h-full w-full object-cover"
+                className="quiet-photo h-full w-full object-cover"
               />
             </div>
           </Reveal>
@@ -676,7 +676,7 @@ function Index() {
                 <span className="eyebrow">{o.tag}</span>
                 <h3 className="mt-3 text-2xl">{o.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground">{o.text}</p>
-                <p className="text-gold-gradient mt-4 font-display text-3xl">{o.save}</p>
+                 <p className="mt-4 font-display text-3xl text-gold">{o.save}</p>
                 <a href="#book" className="btn-gold mt-5 rounded-sm px-5 py-3 text-center text-xs">
                   Book Now
                 </a>
@@ -797,10 +797,9 @@ function Index() {
       <footer className="bg-surface/40">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-3 lg:px-8">
           <div>
-            <img src={logo.url} alt="Hotel Trilok" className="h-16 w-auto object-contain mix-blend-screen" />
+            <img src={horizontalLogo.url} alt="Hotel Trilok" className="h-16 w-auto min-w-20 object-contain" />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Three worlds, one hospitality. A modern palace hotel for travellers who notice the
-              details.
+              Three worlds, one hospitality. Rooted in timeless tradition and shaped for modern luxury.
             </p>
             <div className="mt-5 flex gap-3">
               {[Instagram, Facebook, Linkedin, Youtube].map((Icon, i) => (
