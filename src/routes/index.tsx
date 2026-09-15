@@ -633,7 +633,7 @@ function Index() {
           <Reveal>
             <div className="overflow-hidden rounded-sm border border-gold/30">
               <img
-                src={welcomeAmenities}
+                src={welcomeAmenities.url}
                 alt="Trilok welcome tray with signature tea, coffee, cookies, water and a stocked mini fridge"
                 loading="lazy"
                 width={1280}
