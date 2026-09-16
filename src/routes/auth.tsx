@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/trilok-vertical.png.asset.json";
+import logo from "@/assets/trilok-vertical-clean.png.asset.json";
 import heroLobby from "@/assets/hero-lobby.jpg";
 
 export const Route = createFileRoute("/auth")({
