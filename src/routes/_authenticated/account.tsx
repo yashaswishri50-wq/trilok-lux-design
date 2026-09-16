@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/trilok-horizontal.png.asset.json";
+import logo from "@/assets/trilok-horizontal-clean.png.asset.json";
 
 export const Route = createFileRoute("/_authenticated/account")({
   head: () => ({ meta: [

@@ -31,8 +31,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { BookingWidget } from "@/components/BookingWidget";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
-import horizontalLogo from "@/assets/trilok-horizontal.png.asset.json";
-import verticalLogo from "@/assets/trilok-vertical.png.asset.json";
+import horizontalLogo from "@/assets/trilok-horizontal-clean.png.asset.json";
+import verticalLogo from "@/assets/trilok-vertical-clean.png.asset.json";
 import heroLobby from "@/assets/hero-lobby.jpg";
 import roomSuite from "@/assets/room-suite.jpg";
 import dining from "@/assets/dining.jpg";
@@ -345,12 +345,12 @@ function Index() {
             width={1920}
             height={1088}
             aria-hidden={index !== heroIndex}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+            className={`quiet-photo absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
               index === heroIndex ? "animate-hero-image opacity-100" : "opacity-0"
             }`}
           />
         ))}
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_10%,transparent,oklch(0.12_0.05_268/0.92))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_10%,transparent,rgb(22_43_86/0.94))]" />
         <div className="absolute inset-0 bg-ink/45" />
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 text-center lg:px-8">
           <img
